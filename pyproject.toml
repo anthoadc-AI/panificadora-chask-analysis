@@ -1,0 +1,100 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "panificadora-chask-analysis"
+version = "1.0.0"
+description = "Energy and operational efficiency analysis of the Panificadora Chask plant modernization project (2020-2022)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Anthony Davila" },
+]
+keywords = [
+    "data-analysis",
+    "energy-efficiency",
+    "industrial-engineering",
+    "anomaly-detection",
+    "statistical-analysis",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/anthoadc-AI/panificadora-chask-analysis"
+Repository = "https://github.com/anthoadc-AI/panificadora-chask-analysis"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+panificadora = ["py.typed"]
+
+# ===== Ruff (linter + formatter) =====
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+]
+ignore = ["E501"]  # line too long (handled by formatter)
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/*" = ["E402", "F401"]  # Allow imports anywhere in notebooks
+"tests/*" = ["S101"]  # Allow assert statements in tests
+
+# ===== Pytest =====
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--showlocals",
+    "--tb=short",
+]
+
+# ===== Coverage =====
+[tool.coverage.run]
+source = ["src/panificadora"]
+branch = true
+omit = ["*/tests/*", "*/__init__.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+show_missing = true
+
+# ===== Mypy =====
+[tool.mypy]
+python_version = "3.10"
+strict = false
+ignore_missing_imports = true
+disallow_untyped_defs = true
+warn_unused_ignores = true

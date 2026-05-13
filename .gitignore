@@ -1,0 +1,73 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ===== Virtual environments =====
+venv/
+env/
+ENV/
+.venv/
+.env
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+.jupyter/
+
+# ===== Testing & Quality =====
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+coverage.xml
+*.cover
+
+# ===== IDEs =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ===== Data (track raw, ignore generated) =====
+data/processed/*
+!data/processed/.gitkeep
+data/external/
+data/interim/
+
+# ===== Reports (track only final figures) =====
+reports/figures/*.tmp
+reports/figures/draft_*
+
+# ===== Streamlit =====
+.streamlit/secrets.toml
+
+# ===== MkDocs =====
+site/
+
+# ===== Logs =====
+*.log
+logs/
