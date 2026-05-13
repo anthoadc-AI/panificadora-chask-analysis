@@ -1,4 +1,5 @@
 """Tests for the ROI module."""
+
 from __future__ import annotations
 
 import pandas as pd

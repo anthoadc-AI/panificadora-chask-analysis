@@ -3,13 +3,14 @@
 These tests double as a contract specification for the dataset:
 they document the expected shape, columns, and derived features.
 """
+
 from __future__ import annotations
 
 import pandas as pd
 import pytest
 
 from panificadora.config import EXPECTED_COLUMNS, EXPECTED_ROWS, PERIOD_POST, PERIOD_PRE
-from panificadora.data_loader import load_dataset, split_pre_post, validate_dataset
+from panificadora.data_loader import split_pre_post, validate_dataset
 
 
 class TestLoadDataset:

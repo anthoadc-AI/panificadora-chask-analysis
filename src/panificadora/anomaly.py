@@ -9,9 +9,9 @@ in Section 5.2 of the closure report:
 Plus a Random Forest regressor for feature importance on energy
 consumption, reproducing Figure 9 of the report.
 """
+
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest, RandomForestRegressor
 
@@ -32,9 +32,7 @@ ANOMALY_FEATURES: list[str] = [
 ]
 
 
-def zscore_anomalies(
-    series: pd.Series, threshold: float = ZSCORE_THRESHOLD
-) -> pd.Series:
+def zscore_anomalies(series: pd.Series, threshold: float = ZSCORE_THRESHOLD) -> pd.Series:
     """Flag univariate anomalies using the Z-score method.
 
     A point is anomalous when its standardized deviation from the mean
@@ -138,9 +136,9 @@ def feature_importance_energy(
     )
     model.fit(X, y)
 
-    importances = pd.Series(
-        model.feature_importances_, index=available
-    ).sort_values(ascending=False)
+    importances = pd.Series(model.feature_importances_, index=available).sort_values(
+        ascending=False
+    )
 
     r2 = float(model.score(X, y))
 

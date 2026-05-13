@@ -8,6 +8,7 @@ Implements the protocol described in Section 6 of the closure report:
     3. Cohen's d to quantify practical effect size.
     4. Linear regression for Pre/Post trend analysis.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -235,9 +236,7 @@ def fit_linear_trend(x: np.ndarray | pd.Series, y: np.ndarray | pd.Series) -> Re
     )
 
 
-def project_trend(
-    fit: RegressionFit, x_future: np.ndarray | pd.Series
-) -> np.ndarray:
+def project_trend(fit: RegressionFit, x_future: np.ndarray | pd.Series) -> np.ndarray:
     """Project a fitted regression line onto future x-values."""
     x_arr = np.asarray(x_future, dtype=float)
     return fit.slope * x_arr + fit.intercept

@@ -1,11 +1,11 @@
 """Tests for the EDA module."""
+
 from __future__ import annotations
 
 import pandas as pd
 import pytest
 
 from panificadora.eda import (
-    KPI_COLUMNS,
     correlation_matrix,
     describe_by_period,
     rolling_intensity,

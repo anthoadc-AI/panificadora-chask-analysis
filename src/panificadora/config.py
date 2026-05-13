@@ -3,6 +3,7 @@
 All hard-coded values from the closure report (cut-off dates, KPI baselines,
 energy cost assumptions) live here so they can be overridden centrally.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -64,6 +65,6 @@ RANDOM_STATE: int = 42  # For reproducibility across all stochastic methods
 
 # ===== Visualization defaults =====
 FIGURE_DPI: int = 120
-COLOR_PRE: str = "#E74C3C"   # Red for pre-intervention
+COLOR_PRE: str = "#E74C3C"  # Red for pre-intervention
 COLOR_POST: str = "#27AE60"  # Green for post-intervention
 COLOR_NEUTRAL: str = "#3498DB"

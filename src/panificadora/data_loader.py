@@ -10,6 +10,7 @@ Derived columns:
     - margen_bruto_pct: Gross margin percentage from sales and costs.
     - mes / anio: Calendar month and year extracted from fecha.
 """
+
 from __future__ import annotations
 
 from pathlib import Path

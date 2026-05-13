@@ -1,4 +1,5 @@
 """Tests for the statistical inference module."""
+
 from __future__ import annotations
 
 import numpy as np

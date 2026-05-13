@@ -8,6 +8,7 @@ Implements Section 7.4 of the closure report:
 All economic assumptions live in `config.py` for transparency and
 easy override (e.g. for sensitivity analysis).
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

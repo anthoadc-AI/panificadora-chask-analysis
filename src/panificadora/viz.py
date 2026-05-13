@@ -11,6 +11,7 @@ produced by eda, anomaly, stats, roi). Notebooks display the interactive
 versions; the static versions feed reports/figures/ for the README,
 documentation site, and the PDF report.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -35,7 +36,7 @@ from panificadora.config import (
     PERIOD_POST,
     PERIOD_PRE,
 )
-from panificadora.eda import describe_by_period, rolling_intensity
+from panificadora.eda import rolling_intensity
 from panificadora.roi import ROIResult, payback_curve
 from panificadora.stats import (
     RegressionFit,
@@ -43,7 +44,6 @@ from panificadora.stats import (
     fit_linear_trend,
     project_trend,
 )
-
 
 # ============================================================
 # Style configuration
@@ -122,6 +122,7 @@ def _add_period_shading_mpl(ax: plt.Axes, df: pd.DataFrame) -> None:
 # ============================================================
 # Figure 1 — Time series of energy consumption and production
 # ============================================================
+
 
 def plot_timeseries_static(df: pd.DataFrame) -> plt.Figure:
     """Figure 1 (static): kWh and kg over time with Pre/Post shading."""
@@ -267,7 +268,9 @@ def plot_boxplots_interactive(df: pd.DataFrame) -> go.Figure:
         title="Figure 2 — Distribution of KPIs: Pre vs Post Intervention",
     )
     fig.update_yaxes(matches=None)
-    fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1].replace("_", " ").title()))
+    fig.for_each_annotation(
+        lambda a: a.update(text=a.text.split("=")[-1].replace("_", " ").title())
+    )
     fig.update_layout(height=600, showlegend=False)
     return fig
 
@@ -275,6 +278,7 @@ def plot_boxplots_interactive(df: pd.DataFrame) -> go.Figure:
 # ============================================================
 # Figure 3 — Correlation matrix
 # ============================================================
+
 
 def plot_correlation_static(corr: pd.DataFrame) -> plt.Figure:
     """Figure 3 (static): Pearson correlation heatmap."""
@@ -317,6 +321,7 @@ def plot_correlation_interactive(corr: pd.DataFrame) -> go.Figure:
 # ============================================================
 # Figure 4 — Energy intensity (kWh/kg) over time
 # ============================================================
+
 
 def plot_intensity_static(df: pd.DataFrame) -> plt.Figure:
     """Figure 4 (static): Energy intensity with 3-month moving average."""
@@ -374,9 +379,7 @@ def plot_intensity_interactive(df: pd.DataFrame) -> go.Figure:
             line=dict(color="#E67E22", width=3),
         )
     )
-    fig.add_vline(
-        x=INTERVENTION_CUTOFF, line_dash="dash", line_color="black", opacity=0.6
-    )
+    fig.add_vline(x=INTERVENTION_CUTOFF, line_dash="dash", line_color="black", opacity=0.6)
     fig.update_layout(
         template=PLOTLY_TEMPLATE,
         title="Figure 4 — Energy Intensity Over Time",
@@ -389,6 +392,7 @@ def plot_intensity_interactive(df: pd.DataFrame) -> go.Figure:
 # ============================================================
 # Figure 5 — Statistical tests: p-values & effect sizes
 # ============================================================
+
 
 def plot_stat_tests_static(results_df: pd.DataFrame) -> plt.Figure:
     """Figure 5 (static): p-values and Cohen's d per variable."""
@@ -409,7 +413,9 @@ def plot_stat_tests_static(results_df: pd.DataFrame) -> plt.Figure:
     d_colors = []
     for e in sorted_d["effect"]:
         d_colors.append(
-            {"large": "#27AE60", "medium": "#F1C40F", "small": "#3498DB", "negligible": "#95A5A6"}[e]
+            {"large": "#27AE60", "medium": "#F1C40F", "small": "#3498DB", "negligible": "#95A5A6"}[
+                e
+            ]
         )
     axes[1].barh(sorted_d.index, sorted_d["cohens_d"].abs(), color=d_colors)
     axes[1].set_xlabel("|Cohen's d|")
@@ -477,6 +483,7 @@ def plot_stat_tests_interactive(results_df: pd.DataFrame) -> go.Figure:
 # ============================================================
 # Figure 6 — Anomaly detection on energy consumption
 # ============================================================
+
 
 def plot_anomalies_static(df: pd.DataFrame) -> plt.Figure:
     """Figure 6 (static): kWh time series with Z-score and IF anomalies."""
@@ -570,6 +577,7 @@ def plot_anomalies_interactive(df: pd.DataFrame) -> go.Figure:
 # Figure 7 — Regression trends with projection
 # ============================================================
 
+
 def _build_trend_fits(df: pd.DataFrame) -> tuple[RegressionFit, RegressionFit, np.ndarray]:
     """Helper: fit Pre and Post linear trends and return month indices."""
     df_sorted = df.sort_values("fecha").reset_index(drop=True)
@@ -595,8 +603,17 @@ def plot_trends_static(df: pd.DataFrame, projection_months: int = 12) -> plt.Fig
     post_df = df_sorted[df_sorted["period"] == PERIOD_POST]
 
     fig, ax = plt.subplots(figsize=(11, 5.5))
-    ax.scatter(pre_df["fecha"], pre_df["consumo_kwh"], color=COLOR_PRE, s=50, label="Pre data", alpha=0.7)
-    ax.scatter(post_df["fecha"], post_df["consumo_kwh"], color=COLOR_POST, s=50, label="Post data", alpha=0.7)
+    ax.scatter(
+        pre_df["fecha"], pre_df["consumo_kwh"], color=COLOR_PRE, s=50, label="Pre data", alpha=0.7
+    )
+    ax.scatter(
+        post_df["fecha"],
+        post_df["consumo_kwh"],
+        color=COLOR_POST,
+        s=50,
+        label="Post data",
+        alpha=0.7,
+    )
 
     pre_x = pre_df["month_idx"].to_numpy()
     ax.plot(pre_df["fecha"], project_trend(fit_pre, pre_x), color=COLOR_PRE, lw=2.5)
@@ -613,7 +630,14 @@ def plot_trends_static(df: pd.DataFrame, projection_months: int = 12) -> plt.Fig
         freq="ME",
     )
     proj_y = project_trend(fit_post, proj_x)
-    ax.plot(proj_dates, proj_y, color=COLOR_POST, lw=2, linestyle="--", label=f"Projection +{projection_months}m")
+    ax.plot(
+        proj_dates,
+        proj_y,
+        color=COLOR_POST,
+        lw=2,
+        linestyle="--",
+        label=f"Projection +{projection_months}m",
+    )
     ax.fill_between(proj_dates, proj_y * 0.95, proj_y * 1.05, color=COLOR_POST, alpha=0.15)
 
     _add_cutoff_line_mpl(ax)
@@ -636,23 +660,43 @@ def plot_trends_interactive(df: pd.DataFrame, projection_months: int = 12) -> go
 
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(
-        x=pre_df["fecha"], y=pre_df["consumo_kwh"],
-        mode="markers", name="Pre", marker=dict(color=COLOR_PRE, size=8),
-    ))
-    fig.add_trace(go.Scatter(
-        x=pre_df["fecha"], y=project_trend(fit_pre, pre_df["month_idx"].to_numpy()),
-        mode="lines", name="Pre trend", line=dict(color=COLOR_PRE, width=3),
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=pre_df["fecha"],
+            y=pre_df["consumo_kwh"],
+            mode="markers",
+            name="Pre",
+            marker=dict(color=COLOR_PRE, size=8),
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=pre_df["fecha"],
+            y=project_trend(fit_pre, pre_df["month_idx"].to_numpy()),
+            mode="lines",
+            name="Pre trend",
+            line=dict(color=COLOR_PRE, width=3),
+        )
+    )
 
-    fig.add_trace(go.Scatter(
-        x=post_df["fecha"], y=post_df["consumo_kwh"],
-        mode="markers", name="Post", marker=dict(color=COLOR_POST, size=8),
-    ))
-    fig.add_trace(go.Scatter(
-        x=post_df["fecha"], y=project_trend(fit_post, post_df["month_idx"].to_numpy()),
-        mode="lines", name="Post trend", line=dict(color=COLOR_POST, width=3),
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=post_df["fecha"],
+            y=post_df["consumo_kwh"],
+            mode="markers",
+            name="Post",
+            marker=dict(color=COLOR_POST, size=8),
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=post_df["fecha"],
+            y=project_trend(fit_post, post_df["month_idx"].to_numpy()),
+            mode="lines",
+            name="Post trend",
+            line=dict(color=COLOR_POST, width=3),
+        )
+    )
 
     last_idx = int(df_sorted["month_idx"].max())
     proj_x = np.arange(last_idx + 1, last_idx + 1 + projection_months)
@@ -662,11 +706,15 @@ def plot_trends_interactive(df: pd.DataFrame, projection_months: int = 12) -> go
         freq="ME",
     )
     proj_y = project_trend(fit_post, proj_x)
-    fig.add_trace(go.Scatter(
-        x=proj_dates, y=proj_y,
-        mode="lines", name="Projection",
-        line=dict(color=COLOR_POST, width=2, dash="dash"),
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=proj_dates,
+            y=proj_y,
+            mode="lines",
+            name="Projection",
+            line=dict(color=COLOR_POST, width=2, dash="dash"),
+        )
+    )
 
     fig.add_vline(x=INTERVENTION_CUTOFF, line_dash="dash", line_color="black", opacity=0.6)
     fig.update_layout(
@@ -681,6 +729,7 @@ def plot_trends_interactive(df: pd.DataFrame, projection_months: int = 12) -> go
 # ============================================================
 # Figure 8 — ROI: annual benefits & payback curve
 # ============================================================
+
 
 def plot_roi_static(roi: ROIResult) -> plt.Figure:
     """Figure 8 (static): Annual benefits bar + cumulative payback curve."""
@@ -716,12 +765,20 @@ def plot_roi_static(roi: ROIResult) -> plt.Figure:
     axes[1].set_ylabel("Net position (USD)")
     axes[1].set_title("Cumulative Payback (energy + downtime only)")
     axes[1].fill_between(
-        curve["month"], 0, curve["net_position_usd"],
-        where=curve["net_position_usd"] >= 0, color=COLOR_POST, alpha=0.15,
+        curve["month"],
+        0,
+        curve["net_position_usd"],
+        where=curve["net_position_usd"] >= 0,
+        color=COLOR_POST,
+        alpha=0.15,
     )
     axes[1].fill_between(
-        curve["month"], 0, curve["net_position_usd"],
-        where=curve["net_position_usd"] < 0, color=COLOR_PRE, alpha=0.15,
+        curve["month"],
+        0,
+        curve["net_position_usd"],
+        where=curve["net_position_usd"] < 0,
+        color=COLOR_PRE,
+        alpha=0.15,
     )
 
     fig.suptitle("Figure 8 — ROI and Payback Analysis", fontsize=14, y=1.02)
@@ -732,7 +789,8 @@ def plot_roi_static(roi: ROIResult) -> plt.Figure:
 def plot_roi_interactive(roi: ROIResult) -> go.Figure:
     """Figure 8 (interactive): Annual benefits + payback curve."""
     fig = make_subplots(
-        rows=1, cols=2,
+        rows=1,
+        cols=2,
         subplot_titles=("Annualized Benefits", "Cumulative Payback"),
         horizontal_spacing=0.15,
     )
@@ -740,7 +798,11 @@ def plot_roi_interactive(roi: ROIResult) -> go.Figure:
     fig.add_trace(
         go.Bar(
             x=["Energy", "Downtime", "Total"],
-            y=[roi.energy_savings_annual_usd, roi.downtime_savings_annual_usd, roi.total_annual_benefit_usd],
+            y=[
+                roi.energy_savings_annual_usd,
+                roi.downtime_savings_annual_usd,
+                roi.total_annual_benefit_usd,
+            ],
             marker_color=["#3498DB", "#9B59B6", "#27AE60"],
             text=[
                 f"${roi.energy_savings_annual_usd:,.0f}",
@@ -750,18 +812,23 @@ def plot_roi_interactive(roi: ROIResult) -> go.Figure:
             textposition="outside",
             showlegend=False,
         ),
-        row=1, col=1,
+        row=1,
+        col=1,
     )
 
     monthly = roi.total_annual_benefit_usd / 12.0
     curve = payback_curve(monthly, roi.investment_usd, horizon_months=144)
     fig.add_trace(
         go.Scatter(
-            x=curve["month"], y=curve["net_position_usd"],
-            mode="lines", line=dict(color=COLOR_NEUTRAL, width=2),
-            fill="tozeroy", showlegend=False,
+            x=curve["month"],
+            y=curve["net_position_usd"],
+            mode="lines",
+            line=dict(color=COLOR_NEUTRAL, width=2),
+            fill="tozeroy",
+            showlegend=False,
         ),
-        row=1, col=2,
+        row=1,
+        col=2,
     )
     fig.add_hline(y=0, line_dash="dash", line_color="black", row=1, col=2)
 
@@ -781,6 +848,7 @@ def plot_roi_interactive(roi: ROIResult) -> go.Figure:
 # Figure 9 — Feature importance from Random Forest
 # ============================================================
 
+
 def plot_feature_importance_static(importances: pd.Series, r2: float) -> plt.Figure:
     """Figure 9 (static): Variable importance for energy consumption."""
     configure_style()
@@ -798,14 +866,16 @@ def plot_feature_importance_static(importances: pd.Series, r2: float) -> plt.Fig
 def plot_feature_importance_interactive(importances: pd.Series, r2: float) -> go.Figure:
     """Figure 9 (interactive): Variable importance bar chart."""
     importances_sorted = importances.sort_values(ascending=True)
-    fig = go.Figure(go.Bar(
-        x=importances_sorted.values,
-        y=importances_sorted.index,
-        orientation="h",
-        marker_color=COLOR_NEUTRAL,
-        text=[f"{v:.3f}" for v in importances_sorted.values],
-        textposition="outside",
-    ))
+    fig = go.Figure(
+        go.Bar(
+            x=importances_sorted.values,
+            y=importances_sorted.index,
+            orientation="h",
+            marker_color=COLOR_NEUTRAL,
+            text=[f"{v:.3f}" for v in importances_sorted.values],
+            textposition="outside",
+        )
+    )
     fig.update_layout(
         template=PLOTLY_TEMPLATE,
         title=f"Figure 9 — Feature Importance on Energy Consumption (R²={r2:.3f})",
@@ -819,20 +889,27 @@ def plot_feature_importance_interactive(importances: pd.Series, r2: float) -> go
 # Figure 10 — Sales and gross margin
 # ============================================================
 
+
 def plot_sales_margin_static(df: pd.DataFrame) -> plt.Figure:
     """Figure 10 (static): Monthly sales bars + gross margin line."""
     configure_style()
     fig, ax1 = plt.subplots(figsize=(11, 5))
 
-    ax1.bar(df["fecha"], df["ventas_usd"], color=COLOR_NEUTRAL, alpha=0.7, width=25, label="Sales (USD)")
+    ax1.bar(
+        df["fecha"], df["ventas_usd"], color=COLOR_NEUTRAL, alpha=0.7, width=25, label="Sales (USD)"
+    )
     ax1.set_ylabel("Sales (USD)", color=COLOR_NEUTRAL)
     ax1.tick_params(axis="y", labelcolor=COLOR_NEUTRAL)
     ax1.set_xlabel("Month")
 
     ax2 = ax1.twinx()
     ax2.plot(
-        df["fecha"], df["margen_bruto_pct"], marker="o",
-        color="#F39C12", lw=2.5, label="Gross margin (%)",
+        df["fecha"],
+        df["margen_bruto_pct"],
+        marker="o",
+        color="#F39C12",
+        lw=2.5,
+        label="Gross margin (%)",
     )
     ax2.set_ylabel("Gross margin (%)", color="#F39C12")
     ax2.tick_params(axis="y", labelcolor="#F39C12")
@@ -852,15 +929,20 @@ def plot_sales_margin_interactive(df: pd.DataFrame) -> go.Figure:
 
     fig.add_trace(
         go.Bar(
-            x=df["fecha"], y=df["ventas_usd"],
-            name="Sales (USD)", marker_color=COLOR_NEUTRAL, opacity=0.7,
+            x=df["fecha"],
+            y=df["ventas_usd"],
+            name="Sales (USD)",
+            marker_color=COLOR_NEUTRAL,
+            opacity=0.7,
         ),
         secondary_y=False,
     )
     fig.add_trace(
         go.Scatter(
-            x=df["fecha"], y=df["margen_bruto_pct"],
-            mode="lines+markers", name="Gross margin (%)",
+            x=df["fecha"],
+            y=df["margen_bruto_pct"],
+            mode="lines+markers",
+            name="Gross margin (%)",
             line=dict(color="#F39C12", width=3),
         ),
         secondary_y=True,

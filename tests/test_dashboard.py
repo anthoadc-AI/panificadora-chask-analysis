@@ -4,6 +4,7 @@ Streamlit apps are hard to unit-test (they need a running Streamlit context),
 so this test only verifies the module imports cleanly. That alone catches
 ~80% of breaking-change regressions (missing imports, bad function names).
 """
+
 from __future__ import annotations
 
 import importlib.util

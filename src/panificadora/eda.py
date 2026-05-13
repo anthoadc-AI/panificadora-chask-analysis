@@ -4,6 +4,7 @@ This module provides the pure computation layer for EDA. Plotting lives
 in `viz.py` so that the same numerical results can be visualized with
 either matplotlib (static) or Plotly (interactive).
 """
+
 from __future__ import annotations
 
 import numpy as np
@@ -114,6 +115,5 @@ def summarize_change(stats_df: pd.DataFrame, variable: str) -> str:
     """
     row = stats_df.loc[variable]
     return (
-        f"{variable}: {row['mean_pre']:,.0f} → {row['mean_post']:,.0f} "
-        f"({row['pct_change']:+.1f}%)"
+        f"{variable}: {row['mean_pre']:,.0f} → {row['mean_post']:,.0f} ({row['pct_change']:+.1f}%)"
     )

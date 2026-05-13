@@ -14,6 +14,7 @@ Modules:
     roi: Return on investment quantification.
     viz: All plotting (matplotlib static + Plotly interactive).
 """
+
 from panificadora import anomaly, config, eda, roi, stats, viz
 from panificadora.data_loader import load_dataset, split_pre_post, validate_dataset
 

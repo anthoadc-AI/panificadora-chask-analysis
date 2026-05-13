@@ -1,4 +1,5 @@
 """Tests for the anomaly detection module."""
+
 from __future__ import annotations
 
 import numpy as np
@@ -6,7 +7,6 @@ import pandas as pd
 import pytest
 
 from panificadora.anomaly import (
-    ANOMALY_FEATURES,
     combined_anomaly_report,
     feature_importance_energy,
     isolation_forest_anomalies,
@@ -98,6 +98,4 @@ class TestCombinedReport:
     def test_any_anomaly_is_union(self, df: pd.DataFrame) -> None:
         report = combined_anomaly_report(df)
         expected_union = report["anomaly_zscore"] | report["anomaly_isolation_forest"]
-        pd.testing.assert_series_equal(
-            report["any_anomaly"], expected_union, check_names=False
-        )
+        pd.testing.assert_series_equal(report["any_anomaly"], expected_union, check_names=False)

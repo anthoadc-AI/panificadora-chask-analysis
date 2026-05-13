@@ -4,6 +4,7 @@ These tests don't validate aesthetics — they validate that every plotting
 function executes end-to-end and returns the expected object type.
 This catches API breaks (e.g. when matplotlib or Plotly change signatures).
 """
+
 from __future__ import annotations
 
 import matplotlib
@@ -14,10 +15,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.graph_objects as go
 
+from panificadora.anomaly import feature_importance_energy
 from panificadora.eda import correlation_matrix
 from panificadora.roi import compute_roi
 from panificadora.stats import compare_all_variables
-from panificadora.anomaly import feature_importance_energy
 from panificadora.viz import (
     FIGURE_FILENAMES,
     KPIS_FOR_BOXPLOT,
