@@ -54,7 +54,7 @@ Triangle markers (orange) indicate Z-score anomalies; X markers (red)
 indicate Isolation Forest anomalies. The clustering in the Pre period
 validates the field diagnosis.
 
-![Figure 6 — Anomalies](../assets/figures/figura_06_deteccion_anomalias.png){ .center }
+![Figure 6 — Anomalies](../assets/figures/figura_06_deteccion_anomalias.png)
 
 ## Why combine the two methods
 
@@ -85,7 +85,7 @@ The model achieves a high in-sample R² (the dataset is too small to
 hold out a meaningful test set). The importance ranking is the actionable
 output:
 
-![Figure 9 — Feature importance](../assets/figures/figura_09_feature_importance.png){ .center }
+![Figure 9 — Feature importance](../assets/figures/figura_09_feature_importance.png)
 
 `fallas_maquina` and `produccion_kg` dominate as predictors — consistent
 with field intuition: equipment failures and production volume jointly

@@ -59,7 +59,7 @@ The left panel shows p-values; bars to the left of the dashed line
 absolute Cohen's *d* with magnitude-coded colors (green = large, yellow =
 medium, blue = small, gray = negligible).
 
-![Figure 5 — Statistical tests](../assets/figures/figura_05_tests_estadisticos.png){ .center }
+![Figure 5 — Statistical tests](../assets/figures/figura_05_tests_estadisticos.png)
 
 !!! success "The headline result is rock-solid"
     The energy reduction has a p-value of ~3×10⁻⁹ — twelve orders of
@@ -94,7 +94,7 @@ equipment.
 The dashed line extends the Post trend 12 months into the future,
 suggesting continued improvement if the maintenance program is preserved.
 
-![Figure 7 — Trends](../assets/figures/figura_07_tendencias_regresion.png){ .center }
+![Figure 7 — Trends](../assets/figures/figura_07_tendencias_regresion.png)
 
 ## Why some variables are not significant
 

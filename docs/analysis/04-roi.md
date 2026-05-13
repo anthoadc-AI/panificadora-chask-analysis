@@ -80,7 +80,7 @@ panel shows the cumulative net position — the project starts at
 −$85,000 (the investment), then climbs as benefits accumulate. The
 green-shaded region is where the project is in the black.
 
-![Figure 8 — ROI and payback](../assets/figures/figura_08_roi_payback.png){ .center }
+![Figure 8 — ROI and payback](../assets/figures/figura_08_roi_payback.png)
 
 ## Tariff sensitivity
 

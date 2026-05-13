@@ -42,7 +42,7 @@ Energy consumption (top) and production (bottom) over the 29-month
 period. The vertical dashed line marks August 2021. The clear downward
 shift in kWh after the cutoff is the headline visual evidence.
 
-![Figure 1 — Time series](../assets/figures/figura_01_series_temporales.png){ .center }
+![Figure 1 — Time series](../assets/figures/figura_01_series_temporales.png)
 
 ## Figure 2 — Pre vs Post distributions
 
@@ -52,7 +52,7 @@ clearly shift downward while `fallas_maquina` and
 `tiempo_inactividad_horas` actually *increase* post-intervention — an
 expected commissioning effect.
 
-![Figure 2 — Boxplots](../assets/figures/figura_02_boxplots_pre_post.png){ .center }
+![Figure 2 — Boxplots](../assets/figures/figura_02_boxplots_pre_post.png)
 
 ## Figure 3 — Correlation matrix
 
@@ -60,7 +60,7 @@ Pearson correlation across all KPIs. The strongest positive correlation
 is between `fallas_maquina` and `consumo_kwh`, validating the field
 hypothesis that failing machinery was a primary energy waster.
 
-![Figure 3 — Correlation matrix](../assets/figures/figura_03_matriz_correlacion.png){ .center }
+![Figure 3 — Correlation matrix](../assets/figures/figura_03_matriz_correlacion.png)
 
 ## Figure 4 — Energy intensity
 
@@ -68,7 +68,7 @@ kWh per kg produced — the single most important efficiency KPI. The
 3-month moving average smooths month-to-month noise. The downward trend
 accelerates visibly after August 2021.
 
-![Figure 4 — Energy intensity](../assets/figures/figura_04_intensidad_energetica.png){ .center }
+![Figure 4 — Energy intensity](../assets/figures/figura_04_intensidad_energetica.png)
 
 ## Figure 10 — Sales and gross margin
 
@@ -76,7 +76,7 @@ Monthly sales (bars) and gross margin percentage (line). Note that the
 margin does not rise as the closure report claims — the dataset shows a
 slight decline, contradicting the report's secondary claim.
 
-![Figure 10 — Sales & margin](../assets/figures/figura_10_ventas_margen.png){ .center }
+![Figure 10 — Sales & margin](../assets/figures/figura_10_ventas_margen.png)
 
 ## Key takeaways
 
