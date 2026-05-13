@@ -745,7 +745,7 @@ def plot_roi_static(roi: ROIResult) -> plt.Figure:
     axes[0].bar(benefits.keys(), benefits.values(), color=colors)
     axes[0].set_ylabel("USD / year")
     axes[0].set_title("Annualized Benefits")
-    for i, (k, v) in enumerate(benefits.items()):
+    for i, (_k, v) in enumerate(benefits.items()):
         axes[0].text(i, v, f"${v:,.0f}", ha="center", va="bottom", fontweight="bold")
 
     monthly = roi.total_annual_benefit_usd / 12.0
@@ -857,7 +857,7 @@ def plot_feature_importance_static(importances: pd.Series, r2: float) -> plt.Fig
     ax.barh(importances_sorted.index, importances_sorted.values, color=COLOR_NEUTRAL)
     ax.set_xlabel("Importance")
     ax.set_title(f"Figure 9 — Feature Importance on Energy Consumption (R²={r2:.3f})")
-    for i, (name, val) in enumerate(importances_sorted.items()):
+    for i, (_name, val) in enumerate(importances_sorted.items()):
         ax.text(val, i, f" {val:.3f}", va="center")
     fig.tight_layout()
     return fig

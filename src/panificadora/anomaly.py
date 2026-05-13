@@ -81,7 +81,7 @@ def isolation_forest_anomalies(
     """
     feat = features if features is not None else ANOMALY_FEATURES
     available = [c for c in feat if c in df.columns]
-    X = df[available].to_numpy()
+    X = df[available].to_numpy()  # noqa: N806
 
     model = IsolationForest(
         n_estimators=n_estimators,
@@ -127,7 +127,7 @@ def feature_importance_energy(
         "costos_usd",
     ]
     available = [c for c in feature_cols if c in df.columns and c != target]
-    X = df[available]
+    X = df[available]  # noqa: N806
     y = df[target]
 
     model = RandomForestRegressor(
