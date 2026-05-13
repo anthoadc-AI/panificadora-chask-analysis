@@ -115,9 +115,7 @@ def compute_roi(
 
     total_annual = energy_usd + downtime_usd
 
-    payback_months = (
-        (investment_usd / total_annual) * 12.0 if total_annual > 0 else float("inf")
-    )
+    payback_months = (investment_usd / total_annual) * 12.0 if total_annual > 0 else float("inf")
 
     roi_y1_pct = 100.0 * (total_annual - investment_usd) / investment_usd
 
