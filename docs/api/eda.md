@@ -1,0 +1,3 @@
+# `panificadora.eda`
+
+::: panificadora.eda

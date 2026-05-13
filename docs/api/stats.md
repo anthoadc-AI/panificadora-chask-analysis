@@ -1,0 +1,3 @@
+# `panificadora.stats`
+
+::: panificadora.stats

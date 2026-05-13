@@ -1,0 +1,3 @@
+# `panificadora.config`
+
+::: panificadora.config

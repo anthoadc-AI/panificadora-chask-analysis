@@ -1,0 +1,3 @@
+# `panificadora.viz`
+
+::: panificadora.viz

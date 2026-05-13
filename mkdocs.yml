@@ -1,0 +1,144 @@
+site_name: Panificadora Chask Analysis
+site_description: Energy and operational efficiency analysis of the Panificadora Chask plant modernization project (2020-2022)
+site_author: Anthony Davila
+site_url: https://anthoadc-ai.github.io/panificadora-chask-analysis/
+
+repo_name: anthoadc-AI/panificadora-chask-analysis
+repo_url: https://github.com/anthoadc-AI/panificadora-chask-analysis
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; 2022 Anthony Davila / INGEDAV S.R.L.
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/bread-slice-outline
+    repo: fontawesome/brands/github
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+
+plugins:
+  - search:
+      lang: en
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_signature_annotations: true
+            separate_signature: true
+            docstring_style: google
+            merge_init_into_class: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            members_order: source
+            heading_level: 2
+
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+  # Python Markdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/anthoadc-AI
+      name: GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/anthony-davila-034b921ba
+      name: LinkedIn
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - The Analysis:
+      - Overview: analysis/overview.md
+      - 1. Exploratory Data Analysis: analysis/01-eda.md
+      - 2. Anomaly Detection: analysis/02-anomalies.md
+      - 3. Statistical Tests: analysis/03-statistics.md
+      - 4. ROI Quantification: analysis/04-roi.md
+  - Dashboard: dashboard.md
+  - API Reference:
+      - panificadora.config: api/config.md
+      - panificadora.data_loader: api/data_loader.md
+      - panificadora.eda: api/eda.md
+      - panificadora.anomaly: api/anomaly.md
+      - panificadora.stats: api/stats.md
+      - panificadora.roi: api/roi.md
+      - panificadora.viz: api/viz.md
+  - Key Findings: findings.md
+  - About: about.md

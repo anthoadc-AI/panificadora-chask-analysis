@@ -1,0 +1,3 @@
+# `panificadora.anomaly`
+
+::: panificadora.anomaly
